@@ -1,0 +1,51 @@
+<div class="workPane">
+  <div class="tablePane">
+    <p class="tableTitle mainBoldTextStyle">Типи експертів і їхні вагомості</p>
+    <table class="dataTable mainTable">
+      <tbody>
+        <tr class="tableRow">
+          <td rowspan="2" class="tableCell centralCell">Типи експертів</td>
+          <td colspan="2" class="tableCell centralCell">
+            Коефіцієнти вагомості, q<sub>k</sub>
+          </td>
+        </tr>
+        <tr class="tableRow">
+          <td class="tableCell centralCell">абсолютне</td>
+          <td class="tableCell centralCell">відносне</td>
+        </tr>
+        @for(expertWeightCoefficient of expertWeightCoefficients; track
+        expertWeightCoefficient; let i = $index) {
+        <tr class="tableRow">
+          <td class="tableCell">
+            {{ expertWeightCoefficient._expertType }}
+          </td>
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField centralCell mainTextStyle"
+              [(ngModel)]="expertWeightCoefficient._weightCoefficient"
+              (change)="changeWeightCoefficient(i)"
+            />
+          </td>
+          <td class="tableCell centralCell">
+            {{ +(expertWeightCoefficient._weightCoefficient / 10) | number }}
+          </td>
+        </tr>
+        }
+
+        <tr class="tableRow">
+          <td class="tableCell emptyTableCell"></td>
+          <td class="tableCell centralCell">
+            {{ expertWeightCoefficientSum | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ +(expertWeightCoefficientSum / 10) | number }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="workPane">
+  <div class="dataSelectionButtonPane">
+    <button
+      (click)="updateDiagramData('AreaExpert')"
+      class="dataSelectionButton"
+      [ngClass]="diagramType === 'AreaExpert' ? 'active' : 'unactive'"
+    >
+      Експерти галузі
+    </button>
+    <button
+      (click)="updateDiagramData('UsabilityExpert')"
+      class="dataSelectionButton"
+      [ngClass]="diagramType === 'UsabilityExpert' ? 'active' : 'unactive'"
+    >
+      Експерти юзабіліті
+    </button>
+    <button
+      (click)="updateDiagramData('ProgrammingExpert')"
+      class="dataSelectionButton"
+      [ngClass]="diagramType === 'ProgrammingExpert' ? 'active' : 'unactive'"
+    >
+      Експерти з програмування
+    </button>
+    <button
+      (click)="updateDiagramData('PotentialUser')"
+      class="dataSelectionButton"
+      [ngClass]="diagramType === 'PotentialUser' ? 'active' : 'unactive'"
+    >
+      Потенційні користувачі
+    </button>
+    <button
+      (click)="updateDiagramData('Average')"
+      class="dataSelectionButton"
+      [ngClass]="diagramType === 'Average' ? 'active' : 'unactive'"
+    >
+      Середні значення
+    </button>
+  </div>
+  @if(isBrowserPlatform) {
+
+  <div class="diagramPane">
+    <p class="diagramTitle">{{ getDiagramType() }}</p>
+    <canvas
+      baseChart
+      [data]="polarAreaChartData"
+      [type]="'radar'"
+      [options]="polarAreaChartOptions"
+    >
+    </canvas>
+  </div>
+  }
+  <div class="diagramParameterPane">
+    <p class="diagramParameter">
+      h<sub>B</sub> = {{ +(expertWeightCoefficient / 10).toFixed(2) | number }}
+    </p>
+    <p class="diagramParameter">
+      S<sub>бк</sub> = {{ +resultArea.toFixed(2) | number }}
+    </p>
+    <p class="diagramParameter">
+      S<sub>кр</sub> = {{ +totalArea.toFixed(2) | number }}
+    </p>
+    <p class="diagramParameter">
+      z<sub>Σ</sub> = {{ +zCoefficient.toFixed(3) | number }}
+    </p>
+  </div>
+</div>

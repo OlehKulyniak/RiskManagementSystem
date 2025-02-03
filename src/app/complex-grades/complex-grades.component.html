@@ -1,0 +1,95 @@
+<div class="workPane">
+  <div class="tablePane">
+    <p class="tableTitle mainBoldTextStyle">
+      Результати розрахунку комплексних показників якості ПЗ та їхні усереднені
+      значення
+    </p>
+    <table class="dataTable mainTable">
+      <tbody>
+        <tr class="tableRow">
+          <td rowspan="2" class="tableCell centralCell">№ з/п</td>
+          <td rowspan="2" class="tableCell centralCell">
+            Критерії оцінювання якості ПЗ
+          </td>
+          <td colspan="3" class="tableCell centralCell">
+            Оцінки експертів (x<sub>i,k</sub>)
+          </td>
+          <td rowspan="2" class="tableCell centralCell">
+            Оцінки користувачів (x<sub>i</sub>, K)
+          </td>
+          <td colspan="2" class="tableCell centralCell">Усереднені оцінки</td>
+        </tr>
+        <tr class="tableRow">
+          <td class="tableCell centralCell">Галузі</td>
+          <td class="tableCell centralCell">Юзабіліті</td>
+          <td class="tableCell centralCell">Програмування</td>
+          <td class="tableCell centralCell">
+            Σw<sub>ij</sub>*x<sub>ij</sub>*q<sub>k</sub>/ΣQ<sub>k</sub>
+          </td>
+          <td class="tableCell centralCell">X<sub>i</sub></td>
+        </tr>
+        <tr class="tableRow">
+          <td class="tableCell emptyTableCell"></td>
+          <td class="tableCell">Коефіцієнти вагомості, q<sub>k</sub></td>
+          @for(criteriaWeightCoef of criteriaWeightCoefs; track
+          criteriaWeightCoefSum) {
+          <td class="tableCell centralCell">{{ criteriaWeightCoef }}</td>
+          }
+          <td class="tableCell centralCell">
+            {{
+              +(
+                getSumOfElements(criteriaWeightCoefs) /
+                criteriaWeightCoefs.length
+              ).toFixed(2) | number
+            }}
+          </td>
+        </tr>
+
+        @for(criteriaGrade of criteriaGrades; track criteriaGrade; let i =
+        $index) {
+        <tr class="tableRow">
+          <td class="tableCell centralCell">{{ i + 1 }}</td>
+          <td class="tableCell">{{ criteriaGrade.criteriaName }}</td>
+          <td class="tableCell centralCell">
+            {{ criteriaGrade._areaExpertGrade | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ criteriaGrade._usabilityExpertGrade | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ criteriaGrade._programmingExpertGrade | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ +criteriaGrade._potentialUserGrade.toFixed(2) | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ +productCoefficients[i].toFixed(2) | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ +xProductCoefficients[i].toFixed(2) | number }}
+          </td>
+        </tr>
+        }
+        <tr class="tableRow">
+          <td class="tableCell emptyTableCell"></td>
+          <td class="tableCell">Усереднені оцінки</td>
+          @for(averageGrade of averagedGrades; track averageGrade) {
+          <td class="tableCell centralCell">
+            {{ +averageGrade.toFixed(2) | number }}
+          </td>
+          }
+        </tr>
+        <tr class="tableRow">
+          <td class="tableCell emptyTableCell"></td>
+          <td class="tableCell">Оцінки з врахуванням вагомості експертів</td>
+          @for(expertWeightedGrade of expertWeightedGrades; track
+          expertWeightedGrade) {
+          <td class="tableCell centralCell">
+            {{ +expertWeightedGrade.toFixed(2) | number }}
+          </td>
+          }
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

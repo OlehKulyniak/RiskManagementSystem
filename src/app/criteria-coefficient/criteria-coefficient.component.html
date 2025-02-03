@@ -1,0 +1,209 @@
+<div class="workPane">
+  <div class="tablePane">
+    <p class="tableTitle mainBoldTextStyle">
+      Відібрані критерії та початкові вагові коефіцієнти експертів за кожним
+      критерієм оцінювання
+    </p>
+    <table class="dataTable mainTable">
+      <tbody>
+        <tr class="tableRow">
+          <td class="tableCell centralCell">№ з/п</td>
+          <td class="tableCell centralCell">Критерії / Вагові коефіцієнти</td>
+          <td class="tableCell centralCell">Експерт галузі</td>
+          <td class="tableCell centralCell">Експерт юзабіліті</td>
+          <td class="tableCell centralCell">Експерт з програмування</td>
+          <td class="tableCell centralCell">Потенційні користувачі</td>
+          <td class="tableCell centralCell">Σ</td>
+          <td class="tableCell centralCell">Середнє значення</td>
+        </tr>
+        @for(criteriaCoefficient of criteriaCoefficients; track
+        criteriaCoefficient; let i = $index) {
+        <tr class="tableRow">
+          <td class="tableCell centralCell">{{ i + 1 }}</td>
+          <td class="tableCell">{{ criteriaCoefficient.criteriaName }}</td>
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField mainTextStyle"
+              [(ngModel)]="criteriaCoefficient.areaExpertCoef"
+              (change)="updateAreaCoefficient(i)"
+            />
+          </td>
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField mainTextStyle"
+              [(ngModel)]="criteriaCoefficient.usabilityExpertCoef"
+              (change)="updateUsabilityCoefficient(i)"
+            />
+          </td>
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField mainTextStyle"
+              [(ngModel)]="criteriaCoefficient.programmingExpertCoef"
+              (change)="updateProgrammingCoefficient(i)"
+            />
+          </td>
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField mainTextStyle"
+              [(ngModel)]="criteriaCoefficient.potentialUserCoef"
+              (change)="updatePotentialUserCoefficient(i)"
+            />
+          </td>
+          <td class="tableCell centralCell">
+            {{ criteriaCoefficientSumArr[i] | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{
+              +(criteriaCoefficientSumArr[i] / criteriaCoefficientSumArr.length)
+                | number
+            }}
+          </td>
+        </tr>
+        }
+        <tr class="tableRow">
+          <td class="tableCell emptyTableCell"></td>
+          <td class="tableCell emptyTableCell"></td>
+          <td class="tableCell centralCell">
+            {{ areaExpertCoefSum | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ usabilityExpertCoefSum | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ programmingExpertCoefSum | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ potentialUserCoefSum | number }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablePane">
+    <p class="tableTitle mainBoldTextStyle">Оцінки експертів</p>
+    <table class="dataTable mainTable">
+      <tbody>
+        <tr class="tableRow">
+          <td class="tableCell centralCell">Експерт галузі</td>
+          <td class="tableCell centalCell">Експерт юзабіліті</td>
+          <td class="tableCell centralCell">Експерт з програмування</td>
+          <td class="tableCell centralCell">Потенційні користувачі</td>
+          <td class="tableCell centralCell">Σ</td>
+          <td class="tableCell centralCell">Середнє значення</td>
+        </tr>
+        @for(expertGrade of expertGrades; track expertGrade; let i = $index) {
+        <tr class="tableRow">
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField mainTextStyle"
+              [(ngModel)]="expertGrade.areaExpertGrade"
+              (change)="updateAreaGrade(i)"
+            />
+          </td>
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField mainTextStyle"
+              [(ngModel)]="expertGrade.usabilityExpertGrade"
+              (change)="updateUsabilityGrade(i)"
+            />
+          </td>
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField mainTextStyle"
+              [(ngModel)]="expertGrade.programmingExpertGrade"
+              (change)="updateProgrammingGrade(i)"
+            />
+          </td>
+
+          <td class="tableCell centralCell">
+            {{ +expertGrade.potentialUserGrade.toFixed(2) | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ expertGradeSumArr[i] | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{
+              +(expertGradeSumArr[i] / expertGradeSumArr.length).toFixed(2)
+                | number
+            }}
+          </td>
+        </tr>
+        }
+        <tr class="tableRow">
+          <td class="tableCell centralCell">
+            {{ areaExpertGradeSum.toFixed(0) | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ usabilityExpertGradeSum.toFixed(0) | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ programmingExpertGradeSum.toFixed(0) | number }}
+          </td>
+          <td class="tableCell centralCell">
+            {{ potentialUserGradeSum.toFixed(0) | number }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablePane">
+    <p class="tableTitle mainBoldTextStyle">Оцінки потенційних користувачів</p>
+    <table class="dataTable mainTable">
+      <tbody>
+        <tr class="tableRow">
+          @for(item of [].constructor(20); track item; let i = $index) {
+          <td class="tableCell centralCell mainBoldTextStyle">{{ i + 1 }}</td>
+          }
+        </tr>
+        @for(row of potentialUserGrades; track row; let i = $index) {
+        <tr class="tableRow">
+          @for(potentialUserGrade of row; track potentialUserGrade; let j =
+          $index) {
+          <td class="tableCell centralCell">
+            <input
+              type="number"
+              min="0"
+              max="10"
+              step="1"
+              class="inputField mainTextStyle"
+              [value]="potentialUserGrade"
+              (change)="updatePotentialUserGrade(i, j, $event)"
+            />
+          </td>
+          }
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

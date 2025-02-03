@@ -1,0 +1,72 @@
+.workPane {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.dataSelectionButtonPane {
+  width: 100%;
+  display: flex;
+}
+
+.dataSelectionButton {
+  height: 23px;
+  width: 20%;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  font-family: sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  box-sizing: content-box;
+  transition: 0.2s ease;
+  margin-bottom: 10px;
+}
+
+.dataSelectionButton:hover {
+  background-color: #fbf7f7;
+}
+
+.dataSelectionButton:active {
+  background-color: #ececec;
+}
+
+.active {
+  background-color: #ececec;
+}
+
+.unactive {
+  background-color: transparent;
+}
+
+.diagramPane {
+  height: 550px;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.diagramParameterPane {
+  width: 100%;
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
+.diagramParameter {
+  margin: 0px;
+  font-size: 18px;
+}
+
+.diagramTitle {
+  width: fit-content;
+  margin: 0px;
+  font-size: 22px;
+  font-weight: bold;
+}
